@@ -71,10 +71,10 @@ $form.addEventListener("submit", (event) => {
   });
   if (strike === 0 && ball === 0) {
     out++;
-    $logs.append(`${value}: 아웃`, document.createElement("br"));
+    $logs.append(`${value} : 아웃`, document.createElement("br"));
   } else {
     $logs.append(
-      `${value}: ${strike} 스트라이크 ${ball} 볼`,
+      `${value} : ${strike} 스트라이크 ${ball} 볼`,
       document.createElement("br")
     );
   }
