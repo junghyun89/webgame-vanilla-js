@@ -19,18 +19,38 @@ console.log(winBalls, bonus);
 const $balls = document.querySelector(".balls");
 const $bonusBall = document.querySelector(".bonusBall");
 
-const showBall = (number, $target) => {
+function colorize(number, $tag) {
+  if (number < 10) {
+    $tag.style.backgroundColor = "red";
+    $tag.style.color = "white";
+  } else if (number < 20) {
+    $tag.style.backgroundColor = "orange";
+    $tag.style.color = "white";
+  } else if (number < 30) {
+    $tag.style.backgroundColor = "darkkhaki";
+    $tag.style.color = "white";
+  } else if (number < 40) {
+    $tag.style.backgroundColor = "blue";
+    $tag.style.color = "white";
+  } else {
+    $tag.style.backgroundColor = "green";
+    $tag.style.color = "white";
+  }
+}
+
+const drawBall = (number, $parent) => {
   const $ball = document.createElement("div");
   $ball.className = "ball";
   $ball.textContent = number;
-  $target.appendChild($ball);
+  colorize(number, $ball);
+  $parent.appendChild($ball);
 };
 
 for (let i = 0; i < winBalls.length; i++)
   setTimeout(() => {
-    showBall(winBalls[i], $balls);
+    drawBall(winBalls[i], $balls);
   }, (i + 1) * 1000);
 
 setTimeout(() => {
-  showBall(bonus, $bonusBall);
+  drawBall(bonus, $bonusBall);
 }, 7000);
