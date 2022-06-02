@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#start-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    padding: 7px;
+    margin: 5px;
+}
+button {
+    padding: 6px;
+    margin: 5px;
+}
+#hero-stat,
+#monster-stat {
+    margin: 6px;
+    font-size: 15px;
+}
+form > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#battle-menu,
+#game-menu {
+    display: none;
+    margin: 10px;
+}
+#hero-name {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-size: 23px;
+    font-weight: bold;
+}
+#message {
+    margin: 10px;
+}
