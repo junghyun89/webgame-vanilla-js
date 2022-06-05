@@ -31,6 +31,7 @@ function onSubmit(event) {
   $tbody.innerHTML = '';
   drawTable();
   $form.className = 'hidden';
+  $timer.classList.remove('hidden');
   startTime = new Date();
   interval = setInterval(() => {
     const time = Math.floor((new Date() - startTime) / 1000);
@@ -164,16 +165,62 @@ function openAround(rI, cI) {
   }, 0);
 }
 
+let normalCellFound = false;
+let searched;
+let firstClick = true;
+function transferMine(rI, cI) {
+  if (normalCellFound) return;
+  if (rI < 0 || rI >= row || cI < 0 || cI >= cell) return;
+  if (searched[rI][cI]) return; // 이미 찾아본 칸이면 종료
+  if (data[rI][cI] === CODE.NORMAL) {
+    normalCellFound = true;
+    data[rI][cI] = CODE.MINE;
+  } else {
+    searched[rI][cI] = true;
+    transferMine(rI - 1, cI - 1);
+    transferMine(rI - 1, cI);
+    transferMine(rI - 1, cI + 1);
+    transferMine(rI, cI - 1);
+    transferMine(rI, cI + 1);
+    transferMine(rI + 1, cI - 1);
+    transferMine(rI + 1, cI);
+    transferMine(rI + 1, cI + 1);
+  }
+}
+
+function showMines() {
+  const mines = [CODE.MINE, CODE.QUESTION_MINE, CODE.FLAG_MINE];
+  data.forEach((row, rowIndex) => {
+    row.forEach((cell, cellIndex) => {
+      if (mines.includes(cell)) {
+        $tbody.children[rowIndex].children[cellIndex].textContent = 'X';
+      }
+    });
+  });
+}
+
 function onLeftClick(event) {
   const target = event.target; // td
   const rowIndex = target.parentNode.rowIndex;
   const cellIndex = target.cellIndex;
-  const cellData = data[rowIndex][cellIndex];
+  let cellData = data[rowIndex][cellIndex];
+  if (firstClick) {
+    firstClick = false; // 한 번 클릭하면 이제는 firstClick 아니지
+    searched = Array(row)
+      .fill()
+      .map(() => []); // 지금 줄을 빈 배열로 만들어 놓음
+    if (cellData === CODE.MINE) {
+      transferMine(rowIndex, cellIndex);
+      data[rowIndex][cellIndex] = CODE.NORMAL;
+      cellData = CODE.NORMAL;
+    }
+  }
   if (cellData === CODE.NORMAL) {
     // 닫힌 칸이면
     openAround(rowIndex, cellIndex);
   } else if (cellData === CODE.MINE) {
     // 지뢰 칸이면
+    showMines();
     target.textContent = '펑';
     target.className = 'opened';
     clearInterval(interval);
