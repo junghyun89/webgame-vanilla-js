@@ -47,56 +47,6 @@ $start.addEventListener('click', () => {
   tick();
 });
 
-// const holes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-// let started = false;
-// let score = 0;
-// let startScore = 0;
-// let time = 10;
-// let startTime = 10;
-// let life = 0;
-// let startLife = 3;
-// let interval;
-// let tickId;
-
-// function stopTime() {
-//   clearInterval(interval);
-// }
-
-// function resetGame() {
-//   stopTime();
-//   started = false;
-//   clearInterval(interval);
-//   clearInterval(tickId);
-//   $score.textContent = `점수 : ${score}`;
-//   $life.textContent = `목숨 : ${life}`;
-//   time = startTime;
-//   life = startLife;
-//   score = startScore;
-// }
-
-// $start.addEventListener('click', () => {
-//   if (started) return;
-//   // resetGame();
-//   $info.classList.remove('toggle');
-//   started = true;
-//   console.log('시작');
-//   clearInterval(interval);
-//   interval = setInterval(() => {
-//     time = (time * 10 - 1) / 10;
-//     $timer.textContent = `제한시간 : ${time}초`;
-//     $score.textContent = `점수 : ${score}`;
-//     $life.textContent = `목숨 : ${startLife}`;
-//     if (time === 0) {
-//       setTimeout(() => {
-//         alert(`게임 오버! 점수는 ${score}점`);
-//       }, 50);
-//       setTimeout(resetGame, 50);
-//     }
-//   }, 100);
-//   tickId = setInterval(tick, 1000);
-//   tick();
-// });
-
 let gopherPercent = 0.3;
 let bombPercent = 0.5; // 폭탄 20% (누적값으로 계산)
 function tick() {
